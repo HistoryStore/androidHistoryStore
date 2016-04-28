@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.icaboalo.historystore.PurchasesApiModel
+import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
 import java.util.*
 
@@ -17,10 +17,10 @@ import java.util.*
 class PurchaseRecyclerAdapter: RecyclerView.Adapter<PurchaseRecyclerAdapter.PurchaseViewHolder> {
 
     var mContext: Context
-    var mPurchaseList: ArrayList<PurchasesApiModel>
+    var mPurchaseList: ArrayList<PurchaseApiModel>
     var mInflater: LayoutInflater
 
-    constructor(context: Context, purchaseList: ArrayList<PurchasesApiModel>) : super() {
+    constructor(context: Context, purchaseList: ArrayList<PurchaseApiModel>) : super() {
         this.mContext = context
         this.mPurchaseList = purchaseList
         mInflater = LayoutInflater.from(context)
@@ -34,8 +34,8 @@ class PurchaseRecyclerAdapter: RecyclerView.Adapter<PurchaseRecyclerAdapter.Purc
     }
 
     override fun onBindViewHolder(holder: PurchaseViewHolder, position: Int) {
-        val purchase: PurchasesApiModel = mPurchaseList[position]
-        holder.mPurchaseDate.text = purchase.date
+        val purchase: PurchaseApiModel = mPurchaseList[position]
+        holder.mPurchaseDate.text = purchase.mPurchaseDate
 
     }
 

@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.Bind
 import butterknife.ButterKnife
-import com.icaboalo.historystore.PurchasesApiModel
+import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
 import com.icaboalo.historystore.adapter.PurchaseRecyclerAdapter
 import java.util.*
@@ -31,24 +31,13 @@ class PurchasesFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         ButterKnife.bind(this@PurchasesFragment, view)
         mPurchaseRecycler = view.findViewById(R.id.purchase_recycler) as RecyclerView
-        setupPurchaseRecycler(createPurchases())
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupPurchaseRecycler(createPurchases())
     }
 
-    fun createPurchases(): ArrayList<PurchasesApiModel> {
-        val list = ArrayList<PurchasesApiModel>()
-        list.add(PurchasesApiModel("Yesterday"))
-        list.add(PurchasesApiModel("Today"))
-        list.add(PurchasesApiModel("Tomorrow"))
-        list.add(PurchasesApiModel("Next week"))
-        return list
-    }
-
-    fun setupPurchaseRecycler(purchasesList: ArrayList<PurchasesApiModel>) {
+    fun setupPurchaseRecycler(purchasesList: ArrayList<PurchaseApiModel>) {
         val purchaseRecyclerAdapter = PurchaseRecyclerAdapter(activity, purchasesList)
         val linearLayout = LinearLayoutManager(activity)
         mPurchaseRecycler!!.adapter = purchaseRecyclerAdapter
