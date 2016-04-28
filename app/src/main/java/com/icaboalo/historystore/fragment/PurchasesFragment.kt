@@ -13,6 +13,7 @@ import butterknife.Bind
 import butterknife.ButterKnife
 import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
+import com.icaboalo.historystore.adapter.OnViewHolderClick
 import com.icaboalo.historystore.adapter.PurchaseRecyclerAdapter
 import com.icaboalo.historystore.io.ApiClient
 import retrofit2.Call
@@ -33,7 +34,6 @@ class PurchasesFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ButterKnife.bind(this@PurchasesFragment, view)
         mPurchaseRecycler = view.findViewById(R.id.purchase_recycler) as RecyclerView
     }
 
@@ -53,7 +53,7 @@ class PurchasesFragment: Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<PurchaseApiModel>>?, t: Throwable?) {
+            override fun onFailure(call: Call<ArrayList<PurchaseApiModel>>, t: Throwable) {
 
             }
         })
@@ -61,7 +61,15 @@ class PurchasesFragment: Fragment() {
     }
 
     fun setupPurchaseRecycler(purchasesList: ArrayList<PurchaseApiModel>) {
-        val purchaseRecyclerAdapter = PurchaseRecyclerAdapter(activity, purchasesList)
+
+        val purchaseRecyclerAdapter = PurchaseRecyclerAdapter(activity, purchasesList, object: OnViewHolderClick{
+            override fun onClick(view: View, position: Int) {
+                Log.d("ba", purchasesList[position].mPlace?.mAddress)
+                Log.d("ba", purchasesList[position].mPurchaseDate)
+            }
+
+        })
+
         val linearLayout = LinearLayoutManager(activity)
         mPurchaseRecycler!!.adapter = purchaseRecyclerAdapter
         mPurchaseRecycler!!.layoutManager = linearLayout
