@@ -7,10 +7,11 @@ import com.google.gson.annotations.SerializedName
  */
 class PlaceApiModel {
 
-    constructor(mAddress: String, mLatitude: String, mLongitude: String) {
-        this.mAddress = mAddress
-        this.mLatitude = mLatitude
-        this.mLongitude = mLongitude
+    constructor(address: String, latitude: String, longitude: String, vendorId: Int) {
+        this.mAddress = address
+        this.mLatitude = latitude
+        this.mLongitude = longitude
+        this.mVendorId = vendorId
     }
 
     @SerializedName("id")
@@ -24,4 +25,10 @@ class PlaceApiModel {
 
     @SerializedName("longitude")
     var mLongitude: String
+
+    @SerializedName("vendor")
+    var mVendor: VendorApiModel? = null
+
+    @SerializedName("vendor_id")
+    var mVendorId: Int
 }
