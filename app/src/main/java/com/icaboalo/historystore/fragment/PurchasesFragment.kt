@@ -1,4 +1,4 @@
-package com.icaboalo.historystore
+package com.icaboalo.historystore.fragment
 
 import android.os.Bundle
 import android.support.annotation.Nullable
@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.Bind
 import butterknife.ButterKnife
+import com.icaboalo.historystore.R
 import java.util.*
 
 /**

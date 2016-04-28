@@ -1,4 +1,4 @@
-package com.icaboalo.historystore
+package com.icaboalo.historystore.activity
 
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -10,6 +10,7 @@ import android.view.MenuItem
 
 import butterknife.Bind
 import butterknife.ButterKnife
+import com.icaboalo.historystore.R
 
 class MainActivity : AppCompatActivity() {
 
