@@ -14,6 +14,10 @@ import butterknife.ButterKnife
 import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
 import com.icaboalo.historystore.adapter.PurchaseRecyclerAdapter
+import com.icaboalo.historystore.io.ApiClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 /**
@@ -35,6 +39,24 @@ class PurchasesFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        getPurchaseListRetrofit()
+    }
+
+    fun getPurchaseListRetrofit(){
+        val call: Call<ArrayList<PurchaseApiModel>> = ApiClient().getApiService().getPurchaseList()
+        call.enqueue(object: Callback<ArrayList<PurchaseApiModel>> {
+
+            override fun onResponse(call: Call<ArrayList<PurchaseApiModel>>, response: Response<ArrayList<PurchaseApiModel>>) {
+                if (response.isSuccessful){
+                    setupPurchaseRecycler(response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<PurchaseApiModel>>?, t: Throwable?) {
+                throw UnsupportedOperationException()
+            }
+        })
+
     }
 
     fun setupPurchaseRecycler(purchasesList: ArrayList<PurchaseApiModel>) {
