@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
@@ -29,13 +30,14 @@ class PurchaseRecyclerAdapter: RecyclerView.Adapter<PurchaseRecyclerAdapter.Purc
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PurchaseViewHolder? {
         val view = mInflater.inflate(R.layout.item_purchases, parent, false)
-        val viewHolder: PurchaseViewHolder = PurchaseViewHolder(view, R.id.purchase_date_text)
+        val viewHolder: PurchaseViewHolder = PurchaseViewHolder(view, R.id.purchase_date_text, R.id.status_checkbox)
         return viewHolder
     }
 
     override fun onBindViewHolder(holder: PurchaseViewHolder, position: Int) {
         val purchase: PurchaseApiModel = mPurchaseList[position]
         holder.mPurchaseDate.text = purchase.mPurchaseDate
+        holder.mStatusCheckbox.isChecked = purchase.mStatus
 
     }
 
@@ -46,9 +48,11 @@ class PurchaseRecyclerAdapter: RecyclerView.Adapter<PurchaseRecyclerAdapter.Purc
     class PurchaseViewHolder: RecyclerView.ViewHolder {
 
         var mPurchaseDate: TextView
+        var mStatusCheckbox: CheckBox
 
-        constructor(itemView: View, purchaseDate: Int) : super(itemView){
-            mPurchaseDate = itemView.findViewById(purchaseDate) as TextView
+        constructor(itemView: View, purchaseDateId: Int, statusCheckboxId: Int) : super(itemView){
+            mPurchaseDate = itemView.findViewById(purchaseDateId) as TextView
+            mStatusCheckbox = itemView.findViewById(statusCheckboxId) as CheckBox
         }
     }
 }
