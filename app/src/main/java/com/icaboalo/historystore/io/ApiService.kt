@@ -10,10 +10,10 @@ import java.util.*
  */
 interface ApiService {
 
-    @GET("/lists")
+    @GET("lists/")
     fun getPurchaseList(): Call<ArrayList<PurchaseApiModel>>
 
-    @GET("/vendors")
+    @GET("vendors/")
     fun getVendorList():Call<ArrayList<VendorApiModel>>
 }
 

@@ -47,13 +47,14 @@ class PurchasesFragment: Fragment() {
         call.enqueue(object: Callback<ArrayList<PurchaseApiModel>> {
 
             override fun onResponse(call: Call<ArrayList<PurchaseApiModel>>, response: Response<ArrayList<PurchaseApiModel>>) {
+                Log.d("RESPONSE", "" + response.isSuccessful)
                 if (response.isSuccessful){
                     setupPurchaseRecycler(response.body())
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<PurchaseApiModel>>?, t: Throwable?) {
-                throw UnsupportedOperationException()
+
             }
         })
 
