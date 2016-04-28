@@ -11,6 +11,7 @@ import android.view.MenuItem
 import butterknife.Bind
 import butterknife.ButterKnife
 import com.icaboalo.historystore.R
+import com.icaboalo.historystore.fragment.PurchasesFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,23 +27,26 @@ class MainActivity : AppCompatActivity() {
         val nToolbar = findViewById(R.id.app_bar) as Toolbar?
         setSupportActionBar(nToolbar)
         ButterKnife.bind(this)
-        navigationViewOnClick()
+//        navigationViewOnClick()
+        replaceFragment(PurchasesFragment())
     }
 
     internal fun navigationViewOnClick() {
-        replaceFragment(Fragment())
         mNavigationView!!.setNavigationItemSelectedListener { item ->
-            val fragment: Fragment? = null
+            var fragment: Fragment? = null
             when (item.itemId) {
                 R.id.action_capture_list -> {
+                    fragment = PurchasesFragment()
                 }
             }
+            replaceFragment(fragment!!)
             mDrawerLayout!!.closeDrawers()
             false
         }
     }
 
-    internal fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
     }
 }
