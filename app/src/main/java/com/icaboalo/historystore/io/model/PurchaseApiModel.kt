@@ -11,6 +11,8 @@ import java.util.*
  */
 class PurchaseApiModel{
 
+
+
     constructor(mPurchaseDate: String, mStatus: Boolean, mUserId: Int, mPlaceId: Int, mProducts: ArrayList<ProductApiModel>) {
         this.mPurchaseDate = mPurchaseDate
         this.mStatus = mStatus
@@ -20,7 +22,7 @@ class PurchaseApiModel{
     }
 
     @SerializedName("id")
-    var mId: String? = null
+    var mId: Int? = null
 
     @SerializedName("date_shopping")
     var mPurchaseDate: String
