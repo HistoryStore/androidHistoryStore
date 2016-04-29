@@ -4,14 +4,13 @@ import com.google.gson.annotations.SerializedName
 import com.icaboalo.historystore.io.PlaceApiModel
 import com.icaboalo.historystore.io.ProductApiModel
 import com.icaboalo.historystore.io.UserApiModel
+import java.io.Serializable
 import java.util.*
 
 /**
  * Created by icaboalo on 27/04/16.
  */
-class PurchaseApiModel{
-
-
+class PurchaseApiModel: Serializable{
 
     constructor(mPurchaseDate: String, mStatus: Boolean, mUserId: Int, mPlaceId: Int, mProducts: ArrayList<ProductApiModel>) {
         this.mPurchaseDate = mPurchaseDate

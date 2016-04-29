@@ -8,9 +8,8 @@ import java.util.*
  */
 class CategoryApiModel {
 
-    constructor(name: String, image: String) {
+    constructor(name: String) {
         this.mName = name
-        this.mImageUrl = image
     }
 
     @SerializedName("id")
@@ -19,8 +18,7 @@ class CategoryApiModel {
     @SerializedName("name")
     var mName: String
 
-    @SerializedName("image")
-    var mImageUrl: String
+
 
     @SerializedName("products")
     var mProducts: ArrayList<ProductApiModel>? = null
