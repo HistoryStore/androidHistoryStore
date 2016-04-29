@@ -15,6 +15,7 @@ import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
 import com.icaboalo.historystore.adapter.OnViewHolderClick
 import com.icaboalo.historystore.adapter.PurchaseRecyclerAdapter
+import com.icaboalo.historystore.fragment.dialog.PurchaseDetailDialog
 import com.icaboalo.historystore.io.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -66,6 +67,7 @@ class PurchasesFragment: Fragment() {
             override fun onClick(view: View, position: Int) {
                 Log.d("ba", purchasesList[position].mPlace?.mAddress)
                 Log.d("ba", purchasesList[position].mPurchaseDate)
+                showDialog("", purchasesList[position].mId!!)
             }
 
         })
@@ -73,5 +75,10 @@ class PurchasesFragment: Fragment() {
         val linearLayout = LinearLayoutManager(activity)
         mPurchaseRecycler!!.adapter = purchaseRecyclerAdapter
         mPurchaseRecycler!!.layoutManager = linearLayout
+    }
+
+    fun showDialog(token: String, purchaseId: Int){
+        val alertDialog = PurchaseDetailDialog().newInstance(token, purchaseId)
+        alertDialog.show(activity.supportFragmentManager, "Purchase Detail")
     }
 }
