@@ -1,6 +1,7 @@
 package com.icaboalo.historystore.fragment.dialog
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
@@ -42,6 +43,10 @@ class PurchaseDetailDialog: DialogFragment() {
         alertDialog.setTitle(getPurchase().mPurchaseDate)
         setupProductRecycler(view, getPurchase().mProducts)
         setTexts(view)
+        alertDialog.setPositiveButton("OK", {
+            dialog: DialogInterface, i: Int ->
+            dialog.dismiss()
+        })
         return alertDialog.create()
     }
 
@@ -50,7 +55,7 @@ class PurchaseDetailDialog: DialogFragment() {
         mAddressText = view.findViewById(address_text) as TextView
         mTotalText = view.findViewById(total_text) as TextView
 
-        mVendorText!!.text = ""
+        mVendorText!!.text = getPurchase().mPlace!!.mVendor!!.mName
         mAddressText!!.text = getPurchase().mPlace!!.mAddress
         mTotalText!!.text = "0"
     }
