@@ -1,19 +1,24 @@
 package com.icaboalo.historystore.activity
 
+import android.content.DialogInterface
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.DialogFragment
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import android.widget.Toast
 
 import butterknife.Bind
 import butterknife.ButterKnife
 import com.icaboalo.historystore.R
 import com.icaboalo.historystore.fragment.PurchasesFragment
+import com.icaboalo.historystore.fragment.dialog.DialogListener
+import com.icaboalo.historystore.fragment.dialog.PurchaseDetailDialog
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DialogListener {
 
     @Bind(R.id.navigation_view)
     internal var mNavigationView: NavigationView? = null
@@ -43,6 +48,21 @@ class MainActivity : AppCompatActivity() {
             mDrawerLayout!!.closeDrawers()
             false
         }
+    }
+
+    override fun onDialogPositiveClick(dialog: DialogInterface, TAG: String) {
+        throw UnsupportedOperationException()
+    }
+
+    override fun onDialogNeutralClick(dialog: DialogInterface, TAG: String) {
+        if (TAG.equals("PURCHASE_DETAIL_DIALOG")){
+            Toast.makeText(this@MainActivity, "SUCCESS", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    override fun onDialogNegativeClick(dialog: DialogInterface, TAG: String) {
+        throw UnsupportedOperationException()
     }
 
     private fun replaceFragment(fragment: Fragment) {

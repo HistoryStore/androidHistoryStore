@@ -35,7 +35,7 @@ class ProductRecyclerAdapter: RecyclerView.Adapter<ProductRecyclerAdapter.Produc
         val product: ProductApiModel = mProductList[position]
         holder.mProduct.text = product.mName
         holder.mQuantity.text = "0"
-        holder.mPrice.text = "0"
+        holder.mPrice.text = product.mPrice
     }
 
     override fun getItemCount(): Int {

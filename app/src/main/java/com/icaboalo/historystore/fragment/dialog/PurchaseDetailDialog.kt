@@ -1,13 +1,13 @@
 package com.icaboalo.historystore.fragment.dialog
 
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.icaboalo.historystore.PurchaseApiModel
@@ -27,12 +27,19 @@ class PurchaseDetailDialog: DialogFragment() {
     var mAddressText: TextView? = null
     var mTotalText: TextView? = null
 
+    var mDialogListener: DialogListener? = null
+
     fun newInstance(purchase: PurchaseApiModel): PurchaseDetailDialog{
         val fragment = PurchaseDetailDialog()
         val args = Bundle()
         args.putSerializable("PURCHASE", purchase)
         fragment.arguments = args
         return fragment
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        mDialogListener = context as DialogListener
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -47,6 +54,12 @@ class PurchaseDetailDialog: DialogFragment() {
             dialog: DialogInterface, i: Int ->
             dialog.dismiss()
         })
+        if (getPurchase().mStatus == false){
+            alertDialog.setNeutralButton("EDIT", {
+                dialog: DialogInterface, i: Int ->
+                mDialogListener!!.onDialogNeutralClick(dialog, "PURCHASE_DETAIL_DIALOG")
+            })
+        }
         return alertDialog.create()
     }
 
