@@ -1,11 +1,12 @@
 package com.icaboalo.historystore.io
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 /**
  * Created by icaboalo on 27/04/16.
  */
-class ProductApiModel {
+class ProductApiModel: Serializable {
 
     constructor(name: String, typeUOM: String, conversion: String, categoryId: Int) {
         this.mName = name

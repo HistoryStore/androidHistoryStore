@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
+import android.util.Log
+import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
 import com.icaboalo.historystore.io.ProductApiModel
 import java.util.*
@@ -13,12 +15,10 @@ import java.util.*
  */
 class PurchaseDetailDialog: DialogFragment() {
 
-    fun newInstance(token: String, purchaseId: Int, list: ArrayList<ProductApiModel>): PurchaseDetailDialog{
+    fun newInstance(purchase: PurchaseApiModel): PurchaseDetailDialog{
         val fragment = PurchaseDetailDialog()
         val args = Bundle()
-        args.putString("TOKEN", token)
-        args.putInt("PURCHASE_ID", purchaseId)
-//        args.putParcelableArrayList("LIST", list)
+        args.putSerializable("PURCHASE", purchase)
         fragment.arguments = args
         return fragment
     }
@@ -28,11 +28,11 @@ class PurchaseDetailDialog: DialogFragment() {
         val inflater = activity.layoutInflater
         val view = inflater.inflate(R.layout.dialog_detail_purchase, null)
         alertDialog.setView(view)
-        alertDialog.setTitle("${getPurchaseId()}")
+        alertDialog.setTitle("${getPurchase().mPurchaseDate}")
         return alertDialog.create()
     }
 
-    fun getPurchaseId(): Int{
-        return arguments.getInt("PURCHASE_ID")
+    fun getPurchase(): PurchaseApiModel{
+        return arguments.getSerializable("PURCHASE") as PurchaseApiModel
     }
 }
