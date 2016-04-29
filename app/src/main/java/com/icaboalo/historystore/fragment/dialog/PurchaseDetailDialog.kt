@@ -28,7 +28,7 @@ class PurchaseDetailDialog: DialogFragment() {
         val inflater = activity.layoutInflater
         val view = inflater.inflate(R.layout.dialog_detail_purchase, null)
         alertDialog.setView(view)
-        alertDialog.setTitle("${getPurchase().mPurchaseDate}")
+        alertDialog.setTitle(getPurchase().mPurchaseDate)
         return alertDialog.create()
     }
 
