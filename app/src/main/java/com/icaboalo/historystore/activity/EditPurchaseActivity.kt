@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar
 import android.widget.ArrayAdapter
 import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
+import com.icaboalo.historystore.adapter.CustomPlaceSpinnerAdapter
 import com.icaboalo.historystore.adapter.ProductRecyclerAdapter
 import com.icaboalo.historystore.io.ApiClient
 import com.icaboalo.historystore.io.PlaceApiModel
@@ -43,7 +44,7 @@ class EditPurchaseActivity : AppCompatActivity() {
     }
 
     fun setupPlaceSpinner(placeList: ArrayList<PlaceApiModel>){
-        val arrayAdapter: ArrayAdapter<PlaceApiModel> = ArrayAdapter(this@EditPurchaseActivity, android.R.layout.simple_spinner_dropdown_item, placeList)
+        val arrayAdapter: CustomPlaceSpinnerAdapter = CustomPlaceSpinnerAdapter(this@EditPurchaseActivity, R.layout.custom_place_spinner, placeList)
         place_spinner.adapter = arrayAdapter
     }
 

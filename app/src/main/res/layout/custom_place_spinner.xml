@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="3px" >
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="3dp">
 
     <ImageView
         android:id="@+id/vendor_image"
-        android:layout_width="100px"
-        android:layout_height="80px"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/ic_launcher"/>
+
     <TextView
         android:id="@+id/vendor_text"
         android:layout_width="wrap_content"
@@ -16,17 +23,17 @@
         android:padding="3dp"
         android:text="JMD Group"
         android:textColor="#0022ee"
-        android:textSize="22dp"
-        android:textStyle="bold" />
+        android:textSize="22sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/address_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/vendor_text"
-        android:layout_marginLeft="5dip"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/vendor_image"
-        android:padding="2px"
         android:text="beyond the expectations..."
-        android:textColor="#777777" />
+        android:textColor="#777777"
+        android:textSize="10dp"/>
 </RelativeLayout>

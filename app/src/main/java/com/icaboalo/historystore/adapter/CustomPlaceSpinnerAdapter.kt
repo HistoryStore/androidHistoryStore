@@ -1,6 +1,7 @@
 package com.icaboalo.historystore.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,16 +28,16 @@ class CustomPlaceSpinnerAdapter : ArrayAdapter<PlaceApiModel> {
         this.mResource = resource
     }
 
-    override fun getDropDownView(position: Int, convertView: View, parent: ViewGroup): View {
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         return getCustomView(position, convertView, parent)
     }
 
-    override fun getView(position: Int, convertView: View, parent: ViewGroup): View? {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
         return getCustomView(position, convertView, parent)
     }
 
 
-    fun getCustomView(position: Int, convertView: View, parent: ViewGroup): View{
+    fun getCustomView(position: Int, convertView: View?, parent: ViewGroup): View{
         val inflater: LayoutInflater = LayoutInflater.from(mContext)
         val mySpinner: View = inflater.inflate(mResource, parent, false)
         val vendorText: TextView = mySpinner.findViewById(R.id.vendor_text) as TextView
@@ -45,6 +46,7 @@ class CustomPlaceSpinnerAdapter : ArrayAdapter<PlaceApiModel> {
         vendorText.text = mPlaceList[position].mVendor!!.mName
         addressText.text = mPlaceList[position].mAddress
         Picasso.with(mContext).load(mPlaceList[position].mVendor!!.mImageUrl).into(vendorImage)
+        Log.d("IMAGE", mPlaceList[position].mVendor!!.mImageUrl)
         return mySpinner
     }
 
