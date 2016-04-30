@@ -46,7 +46,6 @@ class CustomPlaceSpinnerAdapter : ArrayAdapter<PlaceApiModel> {
         vendorText.text = mPlaceList[position].mVendor!!.mName
         addressText.text = mPlaceList[position].mAddress
         Picasso.with(mContext).load(mPlaceList[position].mVendor!!.mImageUrl).into(vendorImage)
-        Log.d("IMAGE", mPlaceList[position].mVendor!!.mImageUrl)
         return mySpinner
     }
 

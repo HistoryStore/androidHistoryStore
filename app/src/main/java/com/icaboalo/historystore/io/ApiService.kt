@@ -18,5 +18,8 @@ interface ApiService {
 
     @GET("places/")
     fun getPlaceList(): Call<ArrayList<PlaceApiModel>>
+
+    @GET("products/")
+    fun getProductList(): Call<ArrayList<ProductApiModel>>
 }
 

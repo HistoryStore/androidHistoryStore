@@ -44,4 +44,8 @@ class ProductApiModel: Serializable {
 
     @SerializedName("category_id")
     var mCategoryId: Int
+
+    override fun toString(): String {
+        return mName
+    }
 }
