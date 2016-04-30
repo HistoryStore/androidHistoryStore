@@ -15,5 +15,8 @@ interface ApiService {
 
     @GET("vendors/")
     fun getVendorList():Call<ArrayList<VendorApiModel>>
+
+    @GET("places/")
+    fun getPlaceList(): Call<ArrayList<PlaceApiModel>>
 }
 

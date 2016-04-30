@@ -19,9 +19,9 @@ class ProductRecyclerAdapter: RecyclerView.Adapter<ProductRecyclerAdapter.Produc
     var mProductList: ArrayList<ProductApiModel>
     var mInflater: LayoutInflater
 
-    constructor(context: Context, purchaseList: ArrayList<ProductApiModel>) : super() {
+    constructor(context: Context, productList: ArrayList<ProductApiModel>) : super() {
         this.mContext = context
-        this.mProductList = purchaseList
+        this.mProductList = productList
         mInflater = LayoutInflater.from(context)
     }
 
