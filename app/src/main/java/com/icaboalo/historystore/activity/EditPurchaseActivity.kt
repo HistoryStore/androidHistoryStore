@@ -3,10 +3,8 @@ package com.icaboalo.historystore.activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.widget.ArrayAdapter
 import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
 import com.icaboalo.historystore.adapter.CustomPlaceSpinnerAdapter
@@ -47,8 +45,10 @@ class EditPurchaseActivity : AppCompatActivity() {
     }
 
     fun setupPlaceSpinner(placeList: ArrayList<PlaceApiModel>){
+        placeList.add(getPurchase().mPlace!!)
         val arrayAdapter: CustomPlaceSpinnerAdapter = CustomPlaceSpinnerAdapter(this@EditPurchaseActivity, R.layout.custom_place_dropdown, placeList)
         place_spinner.adapter = arrayAdapter
+        place_spinner.setSelection(placeList.size-1)
     }
 
     fun getPlacesRetrofit(token: String){
