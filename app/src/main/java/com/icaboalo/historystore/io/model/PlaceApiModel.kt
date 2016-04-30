@@ -1,11 +1,12 @@
 package com.icaboalo.historystore.io
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 /**
  * Created by icaboalo on 27/04/16.
  */
-class PlaceApiModel {
+class PlaceApiModel: Serializable {
 
     constructor(address: String, latitude: String, longitude: String, vendorId: Int) {
         this.mAddress = address

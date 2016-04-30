@@ -57,7 +57,7 @@ class PurchaseDetailDialog: DialogFragment() {
         if (getPurchase().mStatus == false){
             alertDialog.setNeutralButton("EDIT", {
                 dialog: DialogInterface, i: Int ->
-                mDialogListener!!.onDialogNeutralClick(dialog, "PURCHASE_DETAIL_DIALOG")
+                mDialogListener!!.onDialogNeutralClick(dialog, "PURCHASE_DETAIL_DIALOG", getPurchase())
             })
         }
         return alertDialog.create()
