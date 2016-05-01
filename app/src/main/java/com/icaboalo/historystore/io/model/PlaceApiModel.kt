@@ -8,11 +8,11 @@ import java.io.Serializable
  */
 class PlaceApiModel: Serializable {
 
-    constructor(address: String, latitude: String, longitude: String, vendorId: Int) {
+    constructor(address: String, latitude: String, longitude: String, vendor: VendorApiModel) {
         this.mAddress = address
         this.mLatitude = latitude
         this.mLongitude = longitude
-        this.mVendorId = vendorId
+        this.mVendor = vendor
     }
 
     @SerializedName("id")
@@ -28,8 +28,5 @@ class PlaceApiModel: Serializable {
     var mLongitude: String
 
     @SerializedName("vendor")
-    var mVendor: VendorApiModel? = null
-
-    @SerializedName("vendor_id")
-    var mVendorId: Int
+    var mVendor: VendorApiModel
 }
