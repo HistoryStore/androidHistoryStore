@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
 import com.icaboalo.historystore.adapter.CustomPlaceSpinnerAdapter
@@ -23,29 +26,54 @@ import java.util.*
 
 class EditPurchaseActivity : AppCompatActivity() {
 
+    var mProductList: ArrayList<ProductApiModel>? = null
+    var mPurchase: PurchaseApiModel? = null
+    var mProductRecyclerAdapter: ProductRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_purchase)
+        mPurchase = intent.extras.getSerializable("MODEL") as PurchaseApiModel
         val nToolbar = findViewById(R.id.app_bar) as Toolbar?
         setSupportActionBar(nToolbar)
-        supportActionBar!!.title = "Edit ${getPurchase().mPurchaseDate}"
-        setupProductRecycler(getPurchase().mProducts)
+        supportActionBar!!.title = "Edit ${mPurchase!!.mPurchaseDate}"
+        setupProductRecycler(mPurchase!!.mProducts)
         getPlacesRetrofit("")
-        getProductsRetrofit("")
         getCategoriesRetrofit("")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        add_product_button.setOnClickListener {
+            if (!product_input.text.isEmpty()){
+                if (mProductList != null){
+                    val productPosition = getPosition(mProductList!!, product_input.text.toString())
+                    val product: ProductApiModel = mProductList!![productPosition]
+                    mPurchase!!.mProducts.add(product)
+                    mProductRecyclerAdapter!!.notifyDataSetChanged()
+                    product_input.setText("")
+                    Log.d("ADDED", mPurchase!!.mProducts.toString())
+                }
+            }else product_input.error = "Can't be blank"
+        }
+    }
+
+    fun getPosition(productList: ArrayList<ProductApiModel>, productName: String): Int{
+        for (product in productList){
+            if (product.mName.equals(productName)){
+                return productList.indexOf(product)
+            }
+        }
+        return -1
     }
 
     fun setupProductRecycler(productList: ArrayList<ProductApiModel>){
         val linearLayout: LinearLayoutManager = LinearLayoutManager(this@EditPurchaseActivity)
-        val productRecyclerAdapter: ProductRecyclerAdapter = ProductRecyclerAdapter(this@EditPurchaseActivity, productList)
+        mProductRecyclerAdapter = ProductRecyclerAdapter(this@EditPurchaseActivity, productList)
         product_recycler!!.layoutManager = linearLayout
-        product_recycler!!.adapter = productRecyclerAdapter
+        product_recycler!!.adapter = mProductRecyclerAdapter
     }
 
-    fun getPurchase(): PurchaseApiModel{
-        return intent.extras.getSerializable("MODEL") as PurchaseApiModel
-    }
 
     fun setupPlaceSpinner(placeList: ArrayList<PlaceApiModel>){
         val arrayAdapter: CustomPlaceSpinnerAdapter = CustomPlaceSpinnerAdapter(this@EditPurchaseActivity, R.layout.custom_place_dropdown, placeList)
@@ -55,7 +83,7 @@ class EditPurchaseActivity : AppCompatActivity() {
 
     fun equalObjects(placeList: ArrayList<PlaceApiModel>): Int{
         for (place in placeList){
-            if (place.mAddress.equals(getPurchase().mPlace!!.mAddress)){
+            if (place.mAddress.equals(mPurchase!!.mPlace!!.mAddress)){
                 return placeList.indexOf(place)
             }
         }
@@ -65,6 +93,16 @@ class EditPurchaseActivity : AppCompatActivity() {
     fun setupCategorySpinner(categoryList: ArrayList<CategoryApiModel>){
         val arrayAdapter: ArrayAdapter<CategoryApiModel> = ArrayAdapter(this@EditPurchaseActivity, android.R.layout.simple_spinner_dropdown_item, categoryList)
         category_spinner.adapter = arrayAdapter
+        category_spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                product_input.setAdapter(ProductAutoCompleteAdapter(this@EditPurchaseActivity, android.R.layout.simple_spinner_dropdown_item, categoryList[position].mProducts!!))
+                product_input.threshold = 1
+                mProductList = categoryList[position].mProducts!!
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
     }
 
     fun getPlacesRetrofit(token: String){
@@ -78,23 +116,6 @@ class EditPurchaseActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ArrayList<PlaceApiModel>>, t: Throwable) {
 
-            }
-        })
-    }
-
-    fun getProductsRetrofit(token: String){
-        val call: Call<ArrayList<ProductApiModel>> = ApiClient().getApiService().getProductList()
-        call.enqueue(object: Callback<ArrayList<ProductApiModel>>{
-            override fun onResponse(call: Call<ArrayList<ProductApiModel>>, response: Response<ArrayList<ProductApiModel>>) {
-                if (response.isSuccessful){
-                    product_input.setAdapter(ProductAutoCompleteAdapter(this@EditPurchaseActivity, android.R.layout.simple_spinner_dropdown_item, response.body()))
-                    product_input.threshold = 1
-                    Log.d("READY", "Ready")
-                }
-            }
-
-            override fun onFailure(call: Call<ArrayList<ProductApiModel>>, t: Throwable) {
-                throw UnsupportedOperationException()
             }
         })
     }
