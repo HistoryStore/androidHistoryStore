@@ -56,6 +56,10 @@ class EditPurchaseActivity : AppCompatActivity() {
                 }
             }else product_input.error = "Can't be blank"
         }
+        save_purchase_button.setOnClickListener {
+            mPurchase!!.mPlace = place_spinner.selectedItem as PlaceApiModel
+            putPurchaseRetrofit("", "${mPurchase!!.mId!!}", mPurchase!!)
+        }
     }
 
     fun getPosition(productList: ArrayList<ProductApiModel>, productName: String): Int{
@@ -130,6 +134,24 @@ class EditPurchaseActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ArrayList<CategoryApiModel>>?, t: Throwable?) {
+                throw UnsupportedOperationException()
+            }
+        })
+    }
+
+    fun putPurchaseRetrofit(token: String, purchaseId: String, purchase: PurchaseApiModel){
+        val call: Call<PurchaseApiModel> = ApiClient().getApiService().putPurchase(purchaseId, purchase)
+        call.enqueue(object: Callback<PurchaseApiModel>{
+            override fun onResponse(call: Call<PurchaseApiModel>, response: Response<PurchaseApiModel>) {
+                if (response.isSuccessful){
+                    finish()
+                }else{
+                    val errorBody = response.errorBody()
+                    Log.d("ERROR", errorBody.string())
+                }
+            }
+
+            override fun onFailure(call: Call<PurchaseApiModel>?, t: Throwable?) {
                 throw UnsupportedOperationException()
             }
         })
