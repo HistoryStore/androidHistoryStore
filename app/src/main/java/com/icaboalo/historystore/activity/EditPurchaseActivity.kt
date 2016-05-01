@@ -45,10 +45,18 @@ class EditPurchaseActivity : AppCompatActivity() {
     }
 
     fun setupPlaceSpinner(placeList: ArrayList<PlaceApiModel>){
-        placeList.add(getPurchase().mPlace!!)
         val arrayAdapter: CustomPlaceSpinnerAdapter = CustomPlaceSpinnerAdapter(this@EditPurchaseActivity, R.layout.custom_place_dropdown, placeList)
         place_spinner.adapter = arrayAdapter
-        place_spinner.setSelection(placeList.size-1)
+        place_spinner.setSelection(equalObjects(placeList))
+    }
+
+    fun equalObjects(placeList: ArrayList<PlaceApiModel>): Int{
+        for (place in placeList){
+            if (place.mAddress.equals(getPurchase().mPlace!!.mAddress)){
+                return placeList.indexOf(place)
+            }
+        }
+        return -1
     }
 
     fun getPlacesRetrofit(token: String){
