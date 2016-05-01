@@ -19,8 +19,10 @@ class CategoryApiModel: Serializable {
     @SerializedName("name")
     var mName: String
 
-
-
     @SerializedName("products")
     var mProducts: ArrayList<ProductApiModel>? = null
+
+    override fun toString(): String {
+        return mName
+    }
 }

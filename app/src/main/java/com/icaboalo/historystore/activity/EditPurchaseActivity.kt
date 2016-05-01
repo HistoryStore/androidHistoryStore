@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.widget.ArrayAdapter
 import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
 import com.icaboalo.historystore.adapter.CustomPlaceSpinnerAdapter
 import com.icaboalo.historystore.adapter.ProductAutoCompleteAdapter
 import com.icaboalo.historystore.adapter.ProductRecyclerAdapter
 import com.icaboalo.historystore.io.ApiClient
+import com.icaboalo.historystore.io.CategoryApiModel
 import com.icaboalo.historystore.io.PlaceApiModel
 import com.icaboalo.historystore.io.ProductApiModel
 import kotlinx.android.synthetic.main.activity_edit_purchase.*
@@ -31,6 +33,7 @@ class EditPurchaseActivity : AppCompatActivity() {
         setupProductRecycler(getPurchase().mProducts)
         getPlacesRetrofit("")
         getProductsRetrofit("")
+        getCategoriesRetrofit("")
     }
 
     fun setupProductRecycler(productList: ArrayList<ProductApiModel>){
@@ -57,6 +60,11 @@ class EditPurchaseActivity : AppCompatActivity() {
             }
         }
         return -1
+    }
+
+    fun setupCategorySpinner(categoryList: ArrayList<CategoryApiModel>){
+        val arrayAdapter: ArrayAdapter<CategoryApiModel> = ArrayAdapter(this@EditPurchaseActivity, android.R.layout.simple_spinner_dropdown_item, categoryList)
+        category_spinner.adapter = arrayAdapter
     }
 
     fun getPlacesRetrofit(token: String){
@@ -86,6 +94,21 @@ class EditPurchaseActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ArrayList<ProductApiModel>>, t: Throwable) {
+                throw UnsupportedOperationException()
+            }
+        })
+    }
+
+    fun getCategoriesRetrofit(token: String){
+        val call: Call<ArrayList<CategoryApiModel>> = ApiClient().getApiService().getCategoryList()
+        call.enqueue(object: Callback<ArrayList<CategoryApiModel>>{
+            override fun onResponse(call: Call<ArrayList<CategoryApiModel>>, response: Response<ArrayList<CategoryApiModel>>) {
+                if (response.isSuccessful){
+                    setupCategorySpinner(response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<CategoryApiModel>>?, t: Throwable?) {
                 throw UnsupportedOperationException()
             }
         })

@@ -21,5 +21,8 @@ interface ApiService {
 
     @GET("products/")
     fun getProductList(): Call<ArrayList<ProductApiModel>>
+
+    @GET("categories/")
+    fun getCategoryList(): Call<ArrayList<CategoryApiModel>>
 }
 
