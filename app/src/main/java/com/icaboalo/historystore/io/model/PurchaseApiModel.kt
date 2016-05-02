@@ -12,11 +12,11 @@ import java.util.*
  */
 class PurchaseApiModel: Serializable{
 
-    constructor(mPurchaseDate: String, mStatus: Boolean, mUserId: Int, mPlaceId: Int, mProducts: ArrayList<ProductApiModel>) {
+    constructor(mPurchaseDate: String, mStatus: Boolean, mUser: UserApiModel, mPlace: PlaceApiModel, mProducts: ArrayList<ProductApiModel>) {
         this.mPurchaseDate = mPurchaseDate
         this.mStatus = mStatus
-        this.mUserId = mUserId
-        this.mPlaceId = mPlaceId
+        this.mUser = mUser
+        this.mPlace = mPlace
         this.mProducts = mProducts
     }
 
@@ -31,12 +31,6 @@ class PurchaseApiModel: Serializable{
 
     @SerializedName("user")
     var mUser: UserApiModel? = null
-
-    @SerializedName("user_id")
-    var mUserId: Int
-
-    @SerializedName("place_id")
-    var mPlaceId: Int
 
     @SerializedName("place")
     var mPlace: PlaceApiModel? = null

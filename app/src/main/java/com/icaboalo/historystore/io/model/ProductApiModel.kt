@@ -8,12 +8,12 @@ import java.io.Serializable
  */
 class ProductApiModel: Serializable {
 
-    constructor(name: String, typeUOM: String, conversion: String, price:String, categoryId: Int, imageUrl: String) {
+    constructor(name: String, typeUOM: String, conversion: String, price:String, category: CategoryApiModel, imageUrl: String) {
         this.mName = name
         this.mTypeUOM = typeUOM
         this.mConversion = conversion
         this.mPrice = price
-        this.mCategoryId = categoryId
+        this.mCategory = category
         this.mImageUrl = imageUrl
     }
 
@@ -42,6 +42,7 @@ class ProductApiModel: Serializable {
     @SerializedName("category")
     var mCategory: CategoryApiModel? = null
 
-    @SerializedName("category_id")
-    var mCategoryId: Int
+    override fun toString(): String {
+        return mName
+    }
 }

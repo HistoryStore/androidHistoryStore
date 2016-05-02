@@ -1,6 +1,7 @@
 package com.icaboalo.historystore.ui.activity
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.widget.DrawerLayout
@@ -13,6 +14,7 @@ import android.widget.Toast
 
 import butterknife.Bind
 import butterknife.ButterKnife
+import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
 import com.icaboalo.historystore.ui.fragment.PlacesFragment
 import com.icaboalo.historystore.ui.fragment.PurchasesFragment
@@ -55,9 +57,13 @@ class MainActivity : AppCompatActivity(), DialogListener {
         throw UnsupportedOperationException()
     }
 
-    override fun onDialogNeutralClick(dialog: DialogInterface, TAG: String) {
+    override fun onDialogNeutralClick(dialog: DialogInterface, TAG: String, model: Any?) {
         if (TAG.equals("PURCHASE_DETAIL_DIALOG")){
             Toast.makeText(this@MainActivity, "SUCCESS", Toast.LENGTH_SHORT).show()
+            val editPurchase: Intent = Intent(this@MainActivity, EditPurchaseActivity::class.java)
+            val purchaseModel: PurchaseApiModel = model as PurchaseApiModel
+            editPurchase.putExtra("MODEL", purchaseModel)
+            startActivity(editPurchase)
         }
 
     }
