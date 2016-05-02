@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/layout_store"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:minHeight="80dp">
+
+    <ImageView
+        android:id="@+id/vendor_image"
+        android:layout_width="110dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:padding="8dp"
+        android:scaleType="centerInside"
+        android:src="@android:drawable/ic_delete"
+        android:tint="@color/accent"/>
+
+    <ImageView
+        android:id="@+id/image_chevron_right"
+        android:layout_width="44dp"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="8dp"
+        android:scaleType="centerInside"
+        android:src="@android:drawable/ic_delete"/>
+
+    <TextView
+        android:id="@+id/distance_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/image_chevron_right"
+        android:gravity="center_vertical"
+        android:text="bla bla bla"
+        android:textSize="13sp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/image_local_shipping"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/distance_text"
+        android:padding="14dp"
+        android:scaleType="centerInside"
+        android:src="@android:drawable/ic_delete"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

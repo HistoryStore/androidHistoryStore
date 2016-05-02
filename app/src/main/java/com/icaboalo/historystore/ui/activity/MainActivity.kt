@@ -1,4 +1,4 @@
-package com.icaboalo.historystore.activity
+package com.icaboalo.historystore.ui.activity
 
 import android.content.DialogInterface
 import android.support.design.widget.NavigationView
@@ -14,9 +14,10 @@ import android.widget.Toast
 import butterknife.Bind
 import butterknife.ButterKnife
 import com.icaboalo.historystore.R
-import com.icaboalo.historystore.fragment.PurchasesFragment
-import com.icaboalo.historystore.fragment.dialog.DialogListener
-import com.icaboalo.historystore.fragment.dialog.PurchaseDetailDialog
+import com.icaboalo.historystore.ui.fragment.PlacesFragment
+import com.icaboalo.historystore.ui.fragment.PurchasesFragment
+import com.icaboalo.historystore.ui.fragment.dialog.DialogListener
+import com.icaboalo.historystore.ui.fragment.dialog.PurchaseDetailDialog
 
 class MainActivity : AppCompatActivity(), DialogListener {
 
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity(), DialogListener {
         setSupportActionBar(nToolbar)
         ButterKnife.bind(this)
 //        navigationViewOnClick()
-        replaceFragment(PurchasesFragment())
+        replaceFragment(PlacesFragment())
     }
 
     internal fun navigationViewOnClick() {

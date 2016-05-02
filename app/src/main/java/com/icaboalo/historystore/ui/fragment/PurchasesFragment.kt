@@ -1,4 +1,4 @@
-package com.icaboalo.historystore.fragment
+package com.icaboalo.historystore.ui.fragment
 
 import android.os.Bundle
 import android.support.annotation.Nullable
@@ -13,9 +13,9 @@ import butterknife.Bind
 import butterknife.ButterKnife
 import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
-import com.icaboalo.historystore.adapter.OnViewHolderClick
-import com.icaboalo.historystore.adapter.PurchaseRecyclerAdapter
-import com.icaboalo.historystore.fragment.dialog.PurchaseDetailDialog
+import com.icaboalo.historystore.ui.adapter.OnViewHolderClick
+import com.icaboalo.historystore.ui.adapter.PurchaseRecyclerAdapter
+import com.icaboalo.historystore.ui.fragment.dialog.PurchaseDetailDialog
 import com.icaboalo.historystore.io.ApiClient
 import com.icaboalo.historystore.io.ProductApiModel
 import retrofit2.Call

@@ -1,4 +1,4 @@
-package com.icaboalo.historystore.fragment.dialog
+package com.icaboalo.historystore.ui.fragment.dialog
 
 import android.content.DialogInterface
 import android.support.v4.app.DialogFragment

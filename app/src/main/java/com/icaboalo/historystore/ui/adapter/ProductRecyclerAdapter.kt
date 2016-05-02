@@ -1,4 +1,4 @@
-package com.icaboalo.historystore.adapter
+package com.icaboalo.historystore.ui.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

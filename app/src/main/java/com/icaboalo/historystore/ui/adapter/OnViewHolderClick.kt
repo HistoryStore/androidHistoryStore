@@ -1,4 +1,4 @@
-package com.icaboalo.historystore.adapter
+package com.icaboalo.historystore.ui.adapter
 
 import android.view.View
 

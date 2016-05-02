@@ -1,4 +1,4 @@
-package com.icaboalo.historystore.fragment.dialog
+package com.icaboalo.historystore.ui.fragment.dialog
 
 import android.app.Dialog
 import android.content.Context
@@ -13,7 +13,7 @@ import android.widget.TextView
 import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R.id.*
 import com.icaboalo.historystore.R.layout.dialog_detail_purchase
-import com.icaboalo.historystore.adapter.ProductRecyclerAdapter
+import com.icaboalo.historystore.ui.adapter.ProductRecyclerAdapter
 import com.icaboalo.historystore.io.ProductApiModel
 import java.util.*
 
