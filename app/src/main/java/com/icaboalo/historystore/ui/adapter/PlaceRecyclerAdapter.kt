@@ -20,16 +20,18 @@ class PlaceRecyclerAdapter: RecyclerView.Adapter<PlaceRecyclerAdapter.PlaceViewH
     var mContext: Context
     var mPlaceList: ArrayList<PlaceApiModel>
     var mInflater: LayoutInflater
+    var mViewHolderClick: OnViewHolderClick
 
-    constructor(context: Context, placeList: ArrayList<PlaceApiModel>) : super(){
+    constructor(context: Context, placeList: ArrayList<PlaceApiModel>, viewHolderClick: Any) : super(){
         this.mContext = context
         this.mPlaceList = placeList
         this.mInflater = LayoutInflater.from(context)
+        this.mViewHolderClick = viewHolderClick
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PlaceViewHolder? {
         val view: View = mInflater.inflate(R.layout.item_places, parent, false)
-        return PlaceViewHolder(view, R.id.vendor_image, R.id.distance_text)
+        return PlaceViewHolder(view, R.id.vendor_image, R.id.distance_text, mViewHolderClick)
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
@@ -42,14 +44,20 @@ class PlaceRecyclerAdapter: RecyclerView.Adapter<PlaceRecyclerAdapter.PlaceViewH
         return mPlaceList.size
     }
 
-    inner class PlaceViewHolder: RecyclerView.ViewHolder {
-
+    inner class PlaceViewHolder: RecyclerView.ViewHolder, View.OnClickListener {
         var mVendorImage: ImageView
         var mVendorDistance: TextView
+        var mViewHolderClick: OnViewHolderClick
 
-        constructor(itemView: View, vendorImageId: Int, vendorDistanceId: Int) : super(itemView){
+        constructor(itemView: View, vendorImageId: Int, vendorDistanceId: Int, viewHolderClick: OnViewHolderClick) : super(itemView){
             mVendorImage = itemView.findViewById(vendorImageId) as ImageView
             mVendorDistance = itemView.findViewById(vendorDistanceId) as TextView
+            mViewHolderClick = viewHolderClick
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View) {
+            mViewHolderClick.onClick(v, adapterPosition)
         }
 
         fun setVendorImage(imageUrl: String){
