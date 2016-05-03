@@ -1,4 +1,4 @@
-package com.icaboalo.historystore.adapter
+package com.icaboalo.historystore.ui.adapter
 
 import java.util.ArrayList
 
@@ -48,8 +48,8 @@ class AutoCompleteAdapter(context: Context, resource: Int,
     private inner class ArrayFilter : Filter() {
         private val lock = Object()
 
-        override fun performFiltering(prefix: CharSequence?): Filter.FilterResults {
-            val results = Filter.FilterResults()
+        override fun performFiltering(prefix: CharSequence?): FilterResults {
+            val results = FilterResults()
 
             if (mOriginalValues == null) {
                 synchronized(lock) {
@@ -89,7 +89,7 @@ class AutoCompleteAdapter(context: Context, resource: Int,
 
         @SuppressWarnings("unchecked")
         override fun publishResults(constraint: CharSequence,
-                                    results: Filter.FilterResults) {
+                                    results: FilterResults) {
 
             if (results.values != null) {
                 fullList = results.values as ArrayList<ProductApiModel>

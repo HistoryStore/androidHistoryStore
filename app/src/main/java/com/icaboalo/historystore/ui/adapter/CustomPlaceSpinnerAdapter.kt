@@ -1,4 +1,4 @@
-package com.icaboalo.historystore.adapter
+package com.icaboalo.historystore.ui.adapter
 
 import android.content.Context
 import android.util.Log
@@ -37,7 +37,7 @@ class CustomPlaceSpinnerAdapter : ArrayAdapter<PlaceApiModel> {
     }
 
 
-    fun getCustomView(position: Int, convertView: View?, parent: ViewGroup): View{
+    fun getCustomView(position: Int, convertView: View?, parent: ViewGroup): View {
         val inflater: LayoutInflater = LayoutInflater.from(mContext)
         val mySpinner: View = inflater.inflate(mResource, parent, false)
         val vendorText: TextView = mySpinner.findViewById(R.id.vendor_text) as TextView

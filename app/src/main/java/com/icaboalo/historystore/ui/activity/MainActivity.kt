@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), DialogListener {
         setSupportActionBar(nToolbar)
         ButterKnife.bind(this)
 //        navigationViewOnClick()
-        replaceFragment(PlacesFragment())
+        replaceFragment(PurchasesFragment())
     }
 
     internal fun navigationViewOnClick() {

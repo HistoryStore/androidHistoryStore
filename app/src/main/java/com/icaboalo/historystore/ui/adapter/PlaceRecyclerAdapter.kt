@@ -22,7 +22,7 @@ class PlaceRecyclerAdapter: RecyclerView.Adapter<PlaceRecyclerAdapter.PlaceViewH
     var mInflater: LayoutInflater
     var mViewHolderClick: OnViewHolderClick
 
-    constructor(context: Context, placeList: ArrayList<PlaceApiModel>, viewHolderClick: Any) : super(){
+    constructor(context: Context, placeList: ArrayList<PlaceApiModel>, viewHolderClick: OnViewHolderClick) : super(){
         this.mContext = context
         this.mPlaceList = placeList
         this.mInflater = LayoutInflater.from(context)
@@ -36,7 +36,7 @@ class PlaceRecyclerAdapter: RecyclerView.Adapter<PlaceRecyclerAdapter.PlaceViewH
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
         val place: PlaceApiModel = mPlaceList[position]
-        holder.setVendorImage(place.mVendor!!.mImageUrl)
+//        holder.setVendorImage(place.mVendor.mImageUrl)
         holder.mVendorDistance.text = "DISTANCE"
     }
 

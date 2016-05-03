@@ -1,4 +1,4 @@
-package com.icaboalo.historystore.activity
+package com.icaboalo.historystore.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -11,13 +11,13 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.icaboalo.historystore.PurchaseApiModel
 import com.icaboalo.historystore.R
-import com.icaboalo.historystore.adapter.CustomPlaceSpinnerAdapter
-import com.icaboalo.historystore.adapter.ProductAutoCompleteAdapter
-import com.icaboalo.historystore.adapter.ProductRecyclerAdapter
+import com.icaboalo.historystore.ui.adapter.CustomPlaceSpinnerAdapter
+import com.icaboalo.historystore.ui.adapter.ProductAutoCompleteAdapter
 import com.icaboalo.historystore.io.ApiClient
 import com.icaboalo.historystore.io.CategoryApiModel
 import com.icaboalo.historystore.io.PlaceApiModel
 import com.icaboalo.historystore.io.ProductApiModel
+import com.icaboalo.historystore.ui.adapter.ProductRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_edit_purchase.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -97,7 +97,7 @@ class EditPurchaseActivity : AppCompatActivity() {
     fun setupCategorySpinner(categoryList: ArrayList<CategoryApiModel>){
         val arrayAdapter: ArrayAdapter<CategoryApiModel> = ArrayAdapter(this@EditPurchaseActivity, android.R.layout.simple_spinner_dropdown_item, categoryList)
         category_spinner.adapter = arrayAdapter
-        category_spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+        category_spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 product_input.setAdapter(ProductAutoCompleteAdapter(this@EditPurchaseActivity, android.R.layout.simple_spinner_dropdown_item, categoryList[position].mProducts!!))
                 product_input.threshold = 1
@@ -111,7 +111,7 @@ class EditPurchaseActivity : AppCompatActivity() {
 
     fun getPlacesRetrofit(token: String){
         val call: Call<ArrayList<PlaceApiModel>> = ApiClient().getApiService().getPlaceList()
-        call.enqueue(object: Callback<ArrayList<PlaceApiModel>>{
+        call.enqueue(object: Callback<ArrayList<PlaceApiModel>> {
             override fun onResponse(call: Call<ArrayList<PlaceApiModel>>, response: Response<ArrayList<PlaceApiModel>>) {
                 if (response.isSuccessful){
                     setupPlaceSpinner(response.body())
@@ -126,7 +126,7 @@ class EditPurchaseActivity : AppCompatActivity() {
 
     fun getCategoriesRetrofit(token: String){
         val call: Call<ArrayList<CategoryApiModel>> = ApiClient().getApiService().getCategoryList()
-        call.enqueue(object: Callback<ArrayList<CategoryApiModel>>{
+        call.enqueue(object: Callback<ArrayList<CategoryApiModel>> {
             override fun onResponse(call: Call<ArrayList<CategoryApiModel>>, response: Response<ArrayList<CategoryApiModel>>) {
                 if (response.isSuccessful){
                     setupCategorySpinner(response.body())
@@ -141,7 +141,7 @@ class EditPurchaseActivity : AppCompatActivity() {
 
     fun putPurchaseRetrofit(token: String, purchaseId: String, purchase: PurchaseApiModel){
         val call: Call<PurchaseApiModel> = ApiClient().getApiService().putPurchase(purchaseId, purchase)
-        call.enqueue(object: Callback<PurchaseApiModel>{
+        call.enqueue(object: Callback<PurchaseApiModel> {
             override fun onResponse(call: Call<PurchaseApiModel>, response: Response<PurchaseApiModel>) {
                 if (response.isSuccessful){
                     finish()

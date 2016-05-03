@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.icaboalo.historystore.R
 import com.icaboalo.historystore.io.PlaceApiModel
+import com.icaboalo.historystore.io.VendorApiModel
 import com.icaboalo.historystore.ui.adapter.OnViewHolderClick
 import com.icaboalo.historystore.ui.adapter.PlaceRecyclerAdapter
 import java.util.*
@@ -27,6 +28,18 @@ class PlacesFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mPlaceRecycler = view.findViewById(R.id.place_recycler) as RecyclerView?
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupPlaceRecycler(createPlace())
+    }
+
+    fun createPlace(): ArrayList<PlaceApiModel>{
+        val placeList = ArrayList<PlaceApiModel>()
+        placeList.add(PlaceApiModel("Here", "0", "0", VendorApiModel("La comer", "", ArrayList())))
+        placeList.add(PlaceApiModel("Here", "0", "0", VendorApiModel("Walmart", "", ArrayList())))
+        return placeList
     }
 
     fun setupPlaceRecycler(placeList: ArrayList<PlaceApiModel>){
